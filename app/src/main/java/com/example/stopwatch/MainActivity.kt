@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
     val handler=Handler()
     //くり返し代入はvar
     var timeValue=0
+    var status = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,16 +41,27 @@ class MainActivity : AppCompatActivity() {
 
         //startボタンを押した時の処理
         startButton.setOnClickListener {
-            handler.post(runnable)
+            if(status == 0) {
+                //handlerクラスのインスタンスのpostメソッド
+                handler.post(runnable)
+                //startButton.setEnabled(false)
+                status = 1
+            }
+
         }
+
+        //そう言う事
 
         stopButton.setOnClickListener{
             handler.removeCallbacks(runnable)
+            status=0
+
         }
 
         //reset
         resetButton.setOnClickListener {
             handler.removeCallbacks(runnable)
+            status = 0
             timeValue=0
             timeToText()?.let{
                 timeText.text=it
