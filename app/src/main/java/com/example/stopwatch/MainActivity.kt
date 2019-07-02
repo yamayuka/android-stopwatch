@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        //status=0のとき時間止まってる状態,status=1のとき時間動いてる状態
         //startボタンを押した時の処理
         startButton.setOnClickListener {
             if(status == 0) {
@@ -50,15 +51,14 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        //そう言う事
-
+        //stopボタン押した時の処理
         stopButton.setOnClickListener{
             handler.removeCallbacks(runnable)
             status=0
 
         }
 
-        //reset
+        //resetボタン押した時の処理
         resetButton.setOnClickListener {
             handler.removeCallbacks(runnable)
             status = 0
